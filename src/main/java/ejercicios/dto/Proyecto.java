@@ -31,8 +31,8 @@ public class Proyecto {
 	@JoinTable(
 			
 			name = "asignado",
-			joinColumns = @JoinColumn(name = "proyecto"),
-			inverseJoinColumns = @JoinColumn(name = "cientifico")
+			joinColumns = @JoinColumn(name = "id_proyecto"),
+			inverseJoinColumns = @JoinColumn(name = "id_cientifico")
 	
 	)
 	

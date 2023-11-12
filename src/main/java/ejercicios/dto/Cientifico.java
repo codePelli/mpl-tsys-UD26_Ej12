@@ -23,17 +23,17 @@ public class Cientifico {
 	@Column(name = "dni")
 	private String dni;
 	
-	@Column(name = "nomApels")
-	private String nomApels;
+	@Column(name = "nompels")
+	private String nomapels;
 	
 	@ManyToMany(mappedBy = "cientifico")
 	@JsonIgnoreProperties("cientifico")
 	private List<Proyecto> proyecto;
 
-	public Cientifico(String dni, String nomApels, List<Proyecto> proyecto) {
+	public Cientifico(String dni, String nomapels, List<Proyecto> proyecto) {
 		super();
 		this.dni = dni;
-		this.nomApels = nomApels;
+		this.nomapels = nomapels;
 		this.proyecto = proyecto;
 	}
 	
@@ -44,7 +44,7 @@ public class Cientifico {
 	public Cientifico(String dni, String nomApels) {
 		super();
 		this.dni = dni;
-		this.nomApels = nomApels;
+		this.nomapels = nomApels;
 	}
 
 	public String getDni() {
@@ -54,10 +54,10 @@ public class Cientifico {
 		this.dni = dni;
 	}
 	public String getNomApels() {
-		return nomApels;
+		return nomapels;
 	}
 	public void setNomApels(String nomApels) {
-		this.nomApels = nomApels;
+		this.nomapels = nomApels;
 	}
 	
 	public List<Proyecto> getProyecto() {
