@@ -11,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -19,51 +20,49 @@ import jakarta.persistence.Table;
 public class Cientifico {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "dni")
 	private String dni;
 	
-	@Column(name = "nompels")
+	@Column(name = "nomapels")
 	private String nomapels;
 	
-	@ManyToMany(mappedBy = "cientifico")
-	@JsonIgnoreProperties("cientifico")
-	private List<Proyecto> proyecto;
+	@OneToMany
+	@JoinColumn(name = "cientifico")
+	private List<Asignado> asignado;
 
-	public Cientifico(String dni, String nomapels, List<Proyecto> proyecto) {
-		super();
-		this.dni = dni;
-		this.nomapels = nomapels;
-		this.proyecto = proyecto;
-	}
-	
 	public Cientifico() {
 		super();
 	}
 	
-	public Cientifico(String dni, String nomApels) {
+	public Cientifico(String dni, String nomapels) {
 		super();
 		this.dni = dni;
-		this.nomapels = nomApels;
+		this.nomapels = nomapels;
 	}
 
 	public String getDni() {
 		return dni;
 	}
+	
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	public String getNomApels() {
+	
+	public String getNomapels() {
 		return nomapels;
 	}
-	public void setNomApels(String nomApels) {
-		this.nomapels = nomApels;
+
+	public void setNomapels(String nomapels) {
+		this.nomapels = nomapels;
+	}
+
+	public void setAsignado(List<Asignado> asignado) {
+		this.asignado = asignado;
 	}
 	
-	public List<Proyecto> getProyecto() {
-		return proyecto;
+	@JsonIgnore
+	@OneToMany(mappedBy = "asignado")
+	public List<Asignado> getAsignado() {
+		return asignado;
 	}
-	public void setProyecto(List<Proyecto> proyecto) {
-		this.proyecto = proyecto;
-	}
+	
 }

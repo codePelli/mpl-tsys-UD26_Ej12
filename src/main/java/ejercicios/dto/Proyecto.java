@@ -19,32 +19,17 @@ import jakarta.persistence.JoinColumn;
 public class Proyecto {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+ 	private String id;
 	
 	@Column(name = "nombre")
 	private String nombre;
 	
+	@Column(name = "horas")
 	private int horas;
 	
-	@ManyToMany
-	@JoinTable(
-			
-			name = "asignado",
-			joinColumns = @JoinColumn(name = "id_proyecto"),
-			inverseJoinColumns = @JoinColumn(name = "id_cientifico")
-	
-	)
-	
-	private List<Cientifico> cientifico;
-
-	public Proyecto(String id, String nombre, int horas, List<Cientifico> cientifico) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.horas = horas;
-		this.cientifico = cientifico;
-	}
+	@OneToMany
+	@JoinColumn( name = "proyecto")
+	private List<Asignado> asignado;
 
 	public Proyecto(String id, String nombre, int horas) {
 		super();
@@ -55,14 +40,6 @@ public class Proyecto {
 
 	public Proyecto() {
 		super();
-	}
-	
-	public List<Cientifico> getCientifico() {
-		return cientifico;
-	}
-
-	public void setCientifico(List<Cientifico> cientifico) {
-		this.cientifico = cientifico;
 	}
 
 	public String getId() {
@@ -82,6 +59,15 @@ public class Proyecto {
 	}
 	public void setHoras(int horas) {
 		this.horas = horas;
+	}
+	@JsonIgnore
+	@OneToMany(mappedBy = "asignado")
+	public List<Asignado> getAsignado() {
+		return asignado;
+	}
+
+	public void setAsignado(List<Asignado> asignado) {
+		this.asignado = asignado;
 	}
 
 }
